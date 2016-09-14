@@ -1,0 +1,4 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<info>
+	<infoitem key="UD_register" value="name:ID;datatype:string,name:name;datatype:string,name:phone;datatype:string,name:pwd;datatype:string,name:sex;datatype:string,name:birth;datatype:date,name:question;datatype:string,name:answer;datatype:string,name:IDNum;datatype:string" />
+</info>

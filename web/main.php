@@ -12,7 +12,7 @@ if ((isset($_SERVER['QUERY_STRING'])) && ($_SERVER['QUERY_STRING'] != "")){
 
 if ((isset($_GET['doLogout'])) &&($_GET['doLogout']=="true")){
   //to fully log out a visitor we need to clear the session varialbles
-  $_SESSION['MM_Username'] = NULL;
+  $_SESSION['rname'] = NULL;
   $_SESSION['MM_UserGroup'] = NULL;
   $_SESSION['PrevUrl'] = NULL;
   unset($_SESSION['MM_Username']);
@@ -34,16 +34,19 @@ if ((isset($_GET['doLogout'])) &&($_GET['doLogout']=="true")){
 </head>
 
 <body>
-<table width="269" border="1" cellspacing="2" cellpadding="2">
+<table width="648" height="182" border="1" cellpadding="2" cellspacing="2">
   <tr>
-    <td width="257"><!-- #BeginDate format:Ch1a -->16/9/9  3:29 PM<!-- #EndDate -->
-    登陆成功！欢饮您：<?php echo $_SESSION['MM_username']; ?></td>
+    <td width="711" height="62" align="right"><p><!-- #BeginDate format:Ch1a -->16/9/13  6:19 PM<!-- #EndDate -->
+      登陆成功！欢迎您：<?php echo $_SESSION['MM_Username']; ?></p>
+    <p><a href="../login/update.php?ID=<?php echo $_SESSION['MM_Username'] ?>" >修改您的个人信息</a>&nbsp; <a href="<?php echo $logoutAction ?>" herf="../login/login.php">注销您的账户</a></p></td>
   </tr>
   <tr>
-    <td><a href="../login/update.php" >修改您的个人信息</a>&nbsp;</td>
+    <td height="36" align="right">
+    <a href=check_bill.php?ID=<?php echo $_SESSION['MM_Username']; ?>>check_bill </a>
+    &nbsp;</td>
   </tr>
   <tr>
-    <td><a href="<?php echo $logoutAction ?>" herf="../login/login.php">注销您的账户</a>&nbsp;</td>
+    <td><a href="<?php echo $logoutAction ?>" herf="../login/login.php"></a>&nbsp;</td>
   </tr>
 </table>
 </body>

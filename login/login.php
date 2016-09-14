@@ -58,11 +58,11 @@ if (isset($_POST['ID'])) {
   $loginFoundUser = mysql_num_rows($LoginRS);
   if ($loginFoundUser) {
      $loginStrGroup = "";
-    
 	if (PHP_VERSION >= 5.1) {session_regenerate_id(true);} else {session_regenerate_id();}
     //declare two session variables and assign them
     $_SESSION['MM_Username'] = $loginUsername;
-    $_SESSION['MM_UserGroup'] = $loginStrGroup;	      
+    $_SESSION['MM_UserGroup'] = $loginStrGroup;	
+	//$_SESSION['userID']=$l      
 
     if (isset($_SESSION['PrevUrl']) && false) {
       $MM_redirectLoginSuccess = $_SESSION['PrevUrl'];	
@@ -89,73 +89,24 @@ if (isset($_POST['ID'])) {
     登录
     </caption>
     <tr>
-      <td width="218">用户名<input name="ID" type="text" value="注册ID" maxlength="11"></td>
+      <td width="218">用户名
+        <input name="ID" type="text"  placeholder="注册ID" maxlength="11"></td>
     </tr>
     <tr>
-      <td>密&nbsp;码<input name="pwd" type="password" maxlength="20"></td>
+      <td>密&nbsp;码
+        <input name="pwd" type="password" maxlength="20"></td>
     </tr>
     <tr>
       <td><input name="summit" type="submit" value="登录">
         &nbsp;&nbsp;&nbsp;
-      <input name="reset" type="reset" value="重设"></td>
+        <input name="reset" type="reset" value="重设"></td>
     </tr>
     <tr>
-      <td><a herf="register.php">注册新用户</a>&nbsp; <a herf="lostPwd.php">找回密码</a></td>
+      <td><a href="register.php">注册新用户</a>&nbsp; <a href="lostPwd.php">找回密码</a></td>
     </tr>
   </table>
- 
 </form>
- <p>&nbsp;</p>
-<a herf="admin_login.php">管理员登录</a>
-
-
-<form action="" method="get" name="temp"><table width="335" border="1" cellspacing="2" cellpadding="2">
-  <tr>
-    <th width="2" scope="row">&nbsp;</th>
-    <td width="313"><input type="text" name="sdsd" id="sdsd"></td>
-  </tr>
-  <tr>
-    <th scope="row">&nbsp;</th>
-    <td><input type="text" name="ds" id="ds"></td>
-  </tr>
-  <tr>
-    <th scope="row">&nbsp;</th>
-    <td>
-      <input type="text" name="c" id="c"></td>
-  </tr>
-  
-  <label for="c">sd</label>
-  <tr>
-    <th scope="row">&nbsp;</th>
-    <td><label>ad
-      <input type="text" name="sfaa" id="sfaa">
-    </label></td>
-  </tr>
-  <tr>
-    <th scope="row">&nbsp;</th>
-    <td>&nbsp;</td>
-  </tr>
-  <tr>
-    <th scope="row">&nbsp;</th>
-    <td>&nbsp;</td>
-  </tr>
-  <tr>
-    <th scope="row">&nbsp;</th>
-    <td>&nbsp;</td>
-  </tr>
-  <tr>
-    <th scope="row">&nbsp;</th>
-    <td>&nbsp;</td>
-  </tr>
-  <tr>
-    <th scope="row">&nbsp;</th>
-    <td>&nbsp;</td>
-  </tr>
-  <tr>
-    <th scope="row">&nbsp;</th>
-    <td>&nbsp;</td>
-  </tr>
-</table>
-</form>
+<p>&nbsp;</p>
+<a href="admin_login.php">管理员登录</a>
 </body>
 </html>

@@ -1,5 +1,7 @@
 <?php require_once('../Connections/conn.php'); ?>
 <?php
+// 自动转到 header('Location: http://www.example.com/');
+
 if (!function_exists("GetSQLValueString")) {
 function GetSQLValueString($theValue, $theType, $theDefinedValue = "", $theNotDefinedValue = "") 
 {
@@ -82,26 +84,32 @@ if (isset($_POST['ID'])) {
 </head>
 
 <body>
+<!-- js显示时间-->
+<td width="23%"><script type=text/javascript>
+		document.write("<span id='labtime' width='120px' Font-Size='9pt'></span>")
+		setInterval("labtime.innerText=new Date().toLocaleString()",1000)
+</script></td>
+
 <form METHOD="POST" action="<?php echo $loginFormAction; ?>" id="form1" methord="POST">
-<table width="179" border="1" cellspacing="2" cellpadding="2">
- <caption>
+  <table width="179" border="1" cellspacing="2" cellpadding="2">
+    <caption>
     登录
     </caption>
     <tr>
-      <td width="218">用户名<input name="ID" type="text"  maxlength="11"></td>
+      <td width="218">用户名
+        <input name="ID" type="text"  maxlength="11"></td>
     </tr>
     <tr>
-      <td>密&nbsp;码<input name="pwd" type="password" maxlength="20"></td>
+      <td>密&nbsp;码
+        <input name="pwd" type="password" maxlength="20"></td>
     </tr>
     <tr>
       <td><input name="summit" type="submit" value="登录">
         &nbsp;&nbsp;&nbsp;&nbsp;   &nbsp;  &nbsp;&nbsp;   &nbsp;  &nbsp;&nbsp;   &nbsp;
-      <input name="reset" type="reset" value="重设"></td>
+        <input name="reset" type="reset" value="重设"></td>
     </tr>
-    <tr>
-     
-    </tr>
-</table>
+    <tr> </tr>
+  </table>
 </form>
 </body>
 </html>
