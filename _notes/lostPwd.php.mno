@@ -1,0 +1,4 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<info>
+	<infoitem key="UD_record" value="name:ID;datatype:string,name:name;datatype:string,name:phone;datatype:string,name:pwd;datatype:string,name:question;datatype:string,name:answer;datatype:string" />
+</info>
