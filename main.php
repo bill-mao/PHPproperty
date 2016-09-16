@@ -19,7 +19,7 @@ if ((isset($_GET['doLogout'])) &&($_GET['doLogout']=="true")){
   unset($_SESSION['MM_UserGroup']);
   unset($_SESSION['PrevUrl']);
 	
-  $logoutGoTo = "../login/login.php";
+  $logoutGoTo = "file:///D|/xampps/htdocs/login/login.php";
   if ($logoutGoTo) {
     header("Location: $logoutGoTo");
     exit;
@@ -29,18 +29,15 @@ if ((isset($_GET['doLogout'])) &&($_GET['doLogout']=="true")){
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml">
 <head>
-<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-<title>main</title>
-</head>
-
 <body>
 <table width="90%" height="182" border="1" align="center" cellpadding="2" cellspacing="2">
   <tr>
-    <td height="62" align="right"><?php require('navigation.php')   ?></td>
+    <td height="62" align="right"></td>
   </tr>
   <tr>
-    <td width="711" height="62" align="right"><p><!-- #BeginDate format:Ch1a -->16/9/15  9:46 PM<!-- #EndDate -->
-      登陆成功！欢迎您：<?php echo $_SESSION['MM_Username']; ?></p>
+    <td width="711" height="62" align="right"><p>
+
+      <?php echo $_SESSION['MM_Username']; ?></p>
     <p>&nbsp;</p></td>
   </tr>
   <tr>

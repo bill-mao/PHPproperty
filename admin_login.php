@@ -48,13 +48,13 @@ if (isset($_POST['ID'])) {
   $loginUsername=$_POST['ID'];
   $password=$_POST['pwd'];
   $MM_fldUserAuthorization = "";
-  $MM_redirectLoginSuccess = "../web/admin.php";
+  $MM_redirectLoginSuccess = "admin.php";
   $MM_redirectLoginFailed = "admin_login.php";
   $MM_redirecttoReferrer = false;
   mysql_select_db($database_conn, $conn);
   
   $LoginRS__query=sprintf("SELECT ID, pwd FROM `admin` WHERE ID=%s AND pwd=%s",
-    GetSQLValueString($loginUsername, "int"), GetSQLValueString($password, "text")); 
+    GetSQLValueString($loginUsername, "text"), GetSQLValueString($password, "text")); 
    
   $LoginRS = mysql_query($LoginRS__query, $conn) or die(mysql_error());
   $loginFoundUser = mysql_num_rows($LoginRS);
