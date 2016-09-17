@@ -15,11 +15,11 @@ document.getElementById(SubMenu).style.display = "none";
 } 
 </script>
 <link rel="stylesheet" type="text/css" href="css/style.css" />
-<img src="Images/bg.gif" width="745" height="154" />
 
-<table width="900" border="0" background="Images/bg.gif" align="center" cellpadding="0" cellspacing="0">
+
+<table width="909" border="0" background="Images/bg.gif" align="center" cellpadding="0" cellspacing="0">
   <tr>
-    <td height="115" align="right" valign="bottom" background="Images/banner.gif" bgcolor="#FD9C11"><table width="100%"  border="0" cellspacing="0" cellpadding="0">
+    <td width="909" height="115" align="right" valign="bottom" background="Images/banner.gif" bgcolor="#FD9C11"><table width="100%"  border="0" cellspacing="0" cellpadding="0">
         <tr>
           <td height="26" align="right">当前登录的用户：<?php echo $_SESSION['MM_Username']; ?>&nbsp;&nbsp;&nbsp;&nbsp;</td>
         </tr>

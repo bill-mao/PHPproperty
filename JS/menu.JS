@@ -1,3 +1,54 @@
+//改变center tab的src
+function changeSrcBill() { 
+	document.getElementById('tab').src='check_bill.php';
+}
+
+function changeSrcComplaint(){
+	document.getElementById('tab').src='complaint.php';
+}
+function changeSrcCL(){
+	document.getElementById('tab').src='complaintList.php';
+}
+
+
+//改变管理员的center 的src
+function showHouses()
+{
+	document.getElementById('tab').src='admin_houses.php';
+}
+
+
+
+
+
+function switchSysBar(){ 
+var locate=location.href.replace('center.html','');
+var ssrc=document.all("img1").src.replace(locate,'');
+if (ssrc=="images/main_18.gif")
+{ 
+document.all("img1").src="images/main_18_1.gif";
+document.all("frmTitle").style.display="none" 
+} 
+else
+{ 
+document.all("img1").src="images/main_18.gif";
+document.all("frmTitle").style.display="" 
+} 
+} 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 /*根据类名获得对象--引用自好友司徒正美*/
 function getElementsByClassName(searchClass, node,tag){  

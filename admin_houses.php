@@ -1,8 +1,11 @@
+<?php if(!isset($_SESSION))
+	session_start(); ?>
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
 <html xmlns="http://www.w3.org/1999/xhtml">
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-<title>无标题文档</title>
+<title>bill_check</title>
 <style type="text/css">
 <!--
 body {
@@ -40,6 +43,9 @@ a:active {
 	text-decoration: none;
 }
 .STYLE7 {font-size: 12}
+body,td,th {
+	font-size: 9px;
+}
 
 -->
 </style>
@@ -95,12 +101,13 @@ for(i=0;i<cs.length;i++){
 </head>
 
 <body>
+
 <table width="100%" border="0" align="center" cellpadding="0" cellspacing="0">
   <tr>
     <td height="30"><table width="100%" border="0" cellspacing="0" cellpadding="0">
       <tr>
         <td width="15" height="30"><img src="images/tab_03.gif" width="15" height="30" /></td>
-        <td background="images/tab_05.gif"><img src="images/311.gif" width="16" height="16" /> <span class="STYLE4">账单列表</span></td>
+        <td background="images/tab_05.gif"><img src="images/311.gif" width="16" height="16" /> <span class="STYLE4">房屋管理</span></td>
         <td width="14"><img src="images/tab_07.gif" width="14" height="30" /></td>
       </tr>
     </table></td>
@@ -115,43 +122,46 @@ for(i=0;i<cs.length;i++){
         
         
           <tr>
-            <td width="6%" height="26" background="images/tab_14.gif" class="STYLE1"><div align="center" class="STYLE2 STYLE1">选择</div></td>
-            <td width="8%" height="18" background="images/tab_14.gif" class="STYLE1"><div align="center" class="STYLE2 STYLE1">序号</div></td>
-            <td width="24%" height="18" background="images/tab_14.gif" class="STYLE1"><div align="center" class="STYLE2 STYLE1">运行机器ip地址</div></td>
-            <td width="10%" height="18" background="images/tab_14.gif" class="STYLE1"><div align="center" class="STYLE2 STYLE1">机器名</div></td>
-            <td width="14%" height="18" background="images/tab_14.gif" class="STYLE1"><div align="center" class="STYLE2 STYLE1">节点类型</div></td>
-            <td width="24%" height="18" background="images/tab_14.gif" class="STYLE1"><div align="center" class="STYLE2">服务器进程配置</div></td>
+            <td  height="26" background="images/tab_14.gif" class="STYLE1"><div align="center" class="STYLE2 STYLE1">选择</div></td>
+            <td  height="18" background="images/tab_14.gif" class="STYLE1"><div align="center" class="STYLE2 STYLE1">ID</div></td>
+            <td  height="18" background="images/tab_14.gif" class="STYLE1"><div align="center" class="STYLE2 STYLE1">日期</div></td>
+            <td  height="18" background="images/tab_14.gif" class="STYLE1"><div align="center" class="STYLE2 STYLE1">本月用水量</div></td>
+            <td width="14%" height="18" background="images/tab_14.gif" class="STYLE1"><div align="center" class="STYLE2 STYLE1">水费</div></td>
+            <td height="18" background="images/tab_14.gif" class="STYLE1"><div align="center" class="STYLE2">本月用电量</div></td>
+             <td width="8%" height="18" background="images/tab_14.gif" class="STYLE1"><div align="center" class="STYLE2 STYLE1">电费</div></td>
+              <td width="8%" height="18" background="images/tab_14.gif" class="STYLE1"><div align="center" class="STYLE2 STYLE1">物业费</div></td>
+              <td width="8%" height="18" background="images/tab_14.gif" class="STYLE1"><div align="center" class="STYLE2 STYLE1">总费用费</div></td>
+              
+               <td width="8%" height="18" background="images/tab_14.gif" class="STYLE1"><div align="center" class="STYLE2 STYLE1">是否交费</div></td>
             <td width="7%" height="18" background="images/tab_14.gif" class="STYLE1"><div align="center" class="STYLE2">编辑</div></td>
             <td width="7%" height="18" background="images/tab_14.gif" class="STYLE1"><div align="center" class="STYLE2">删除</div></td>
           </tr>
           
+        
+            <tr>
+              <td height="18" bgcolor="#FFFFFF"><div align="center" class="STYLE1">
+                <input name="checkbox" type="checkbox" class="STYLE2" value="checkbox" />
+              </div></td>
+              <td height="18" bgcolor="#FFFFFF" class="STYLE2"><div align="center" class="STYLE2 STYLE1">肺水肿</div></td>
+              <td height="18" bgcolor="#FFFFFF"><div align="center" class="STYLE2 STYLE1">rrt</div></td>
+              <td height="18" bgcolor="#FFFFFF"><div align="center" class="STYLE2 STYLE1">rthe</div></td>
+              <td height="18" bgcolor="#FFFFFF"><div align="center" class="STYLE2 STYLE1"> rthe</div></td>
+              <td height="18" bgcolor="#FFFFFF"><div align="center" ><a href="#">erth</a></div></td>
+              <td height="18" bgcolor="#FFFFFF"><div align="center" class="STYLE2 STYLE1"> erth</div></td>
+              <td height="18" bgcolor="#FFFFFF"><div align="center" class="STYLE2 STYLE1"> erth</div></td>
+              <td height="18" bgcolor="#FFFFFF"><div align="center" class="STYLE2 STYLE1">reh</div></td>
+              <td height="18" bgcolor="#FFFFFF"><div align="center" class="STYLE2 STYLE1">hert</div></td>
+              <td height="18" bgcolor="#FFFFFF"><div align="center"><img src="images/037.gif" width="9" height="9" /><span class="STYLE1"> [</span><a href="#">编辑</a><span class="STYLE1">]</span></div></td>
+              <td height="18" bgcolor="#FFFFFF"><div align="center"><span class="STYLE2"><img src="images/010.gif" width="9" height="9" /> </span><span class="STYLE1">[</span><a href="#">删除</a><span class="STYLE1">]</span></div></td>
+            </tr>
+            
+          
           
           <tr>
-            <td height="18" bgcolor="#FFFFFF"><div align="center" class="STYLE1">
-              <input name="checkbox" type="checkbox" class="STYLE2" value="checkbox" />
-            </div></td>
-            <td height="18" bgcolor="#FFFFFF" class="STYLE2"><div align="center" class="STYLE2 STYLE1">A0012</div></td>
-            <td height="18" bgcolor="#FFFFFF"><div align="center" class="STYLE2 STYLE1">192.168.0.124</div></td>
-            <td height="18" bgcolor="#FFFFFF"><div align="center" class="STYLE2 STYLE1">wtz_fh</div></td>
-            <td height="18" bgcolor="#FFFFFF"><div align="center" class="STYLE2 STYLE1">DBserver</div></td>
-            <td height="18" bgcolor="#FFFFFF"><div align="center" ><a href="#">服务器进程配置</a></div></td>
-            <td height="18" bgcolor="#FFFFFF"><div align="center"><img src="images/037.gif" width="9" height="9" /><span class="STYLE1"> [</span><a href="#">编辑</a><span class="STYLE1">]</span></div></td>
-            <td height="18" bgcolor="#FFFFFF"><div align="center"><span class="STYLE2"><img src="images/010.gif" width="9" height="9" /> </span><span class="STYLE1">[</span><a href="#">删除</a><span class="STYLE1">]</span></div></td>
-          </tr>
-          
-          
-          <tr>
-            <td height="18" bgcolor="#FFFFFF"><div align="center" class="STYLE1">
-              <input name="checkbox2" type="checkbox" class="STYLE2" value="checkbox" />
-            </div></td>
-            <td height="18" bgcolor="#FFFFFF" class="STYLE2"><div align="center" class="STYLE2 STYLE1">A0012</div></td>
-            <td height="18" bgcolor="#FFFFFF"><div align="center" class="STYLE2 STYLE1">192.168.0.124</div></td>
-            <td height="18" bgcolor="#FFFFFF"><div align="center" class="STYLE2 STYLE1">wtz_fh</div></td>
-            <td height="18" bgcolor="#FFFFFF"><div align="center" class="STYLE2 STYLE1">DBserver</div></td>
-            <td height="18" bgcolor="#FFFFFF"><div align="center"><a href="#">服务器进程配置</a></div></td>
-            <td height="18" bgcolor="#FFFFFF"><div align="center"><span class="STYLE2"><img src="images/037.gif" width="9" height="9" /></span><span class="STYLE1"> [</span><a href="#">编辑</a><span class="STYLE1">]</span></div></td>
-            <td height="18" bgcolor="#FFFFFF"><div align="center"><span class="STYLE2"><img src="images/010.gif" width="9" height="9" /></span><span class="STYLE2"> </span><span class="STYLE1">[</span><a href="#">删除</a><span class="STYLE1">]</span></div></td>
-          </tr>
+            <td height="18" colspan="8" bgcolor="#FFFFFF">
+             <td height="18" bgcolor="#FFFFFF"><div align="center"><img src="images/037.gif" width="9" height="9" /><span class="STYLE1"> [</span><a href="#">交费</a><span class="STYLE1">]</span></div></td>
+            </td>
+            </tr>
           
           
         </table></td>
@@ -168,14 +178,14 @@ for(i=0;i<cs.length;i++){
         <td width="15" height="29"><img src="images/tab_20.gif" width="15" height="29" /></td>
         <td background="images/tab_21.gif"><table width="100%" border="0" cellspacing="0" cellpadding="0">
           <tr>
-            <td width="21%" height="29">共有*页  现在在第 n 页</td>
+            <td width="21%" height="29">共有dfdf</td>
             <td width="79%" valign="top" class="STYLE1"><div align="right">
               <table width="352" height="20" border="0" cellpadding="0" cellspacing="0">
                 <tr>
-                  <td width="62" height="22" valign="middle"><div align="right"><img src="images/first.gif" width="46" height="20" /></div></td>
-                  <td width="50" height="22" valign="middle"><div align="right"><img src="images/back.gif" width="46" height="20" /></div></td>
-                  <td width="54" height="22" valign="middle"><div align="right"><img src="images/next.gif" width="46" height="20" /></div></td>
-                  <td width="49" height="22" valign="middle"><div align="right"><img src="images/last.gif" width="46" height="20" /></div></td>
+                  <td width="62" height="22" valign="middle"><div align="right"><a href=""><img src="images/first.gif" width="46" height="20" /></a></div></td>
+                  <td width="50" height="22" valign="middle"><div align="right"><a href=""><img src="images/back.gif" width="46" height="20" /></a></div></td>
+                  <td width="54" height="22" valign="middle"><div align="right"><a href=""  ><img src="images/next.gif" width="46" height="20" /></a></div></td>
+                  <td width="49" height="22" valign="middle"><div align="right"><a href=""><img src="images/last.gif" width="46" height="20" /></a></div></td>
                   <td width="59" height="22" valign="middle"><div align="right">转到第</div></td>
                   <td width="25" height="22" valign="middle"><span class="STYLE7">
                     <input name="textfield" type="text" class="STYLE1" style="height:10px; width:25px;" size="5" />

@@ -77,15 +77,18 @@ $totalRows_update = mysql_num_rows($update);
 </head>
 
 <body>
+<div style="background-image:url(Images/register.jpg)" align="center">
 <form name="form1" action="<?php echo $editFormAction; ?>" method="POST" id="form1" target="_self">
 <table width="419" border="1" cellspacing="2" cellpadding="2" summary="摘要">
   <caption>
-    请阅读提示信息，认真填写，谢谢~
+    您现在可以修改您的账号
   </caption>
   <tr>
     <th width="17" scope="row">登录账号</th>
     <td width="382">
-    <input name="ID" type="text" id="ID" value="<?php echo $row_update['ID']; ?>" /></td>
+    <label><input name="ID" type="text" id="ID" value="<?php echo $row_update['ID']; ?>" readonly="readonly" />
+    只读账号名不能修改</label>
+    </td>
   </tr>
   <tr>
     <th scope="row">密码</th>
@@ -142,7 +145,7 @@ $totalRows_update = mysql_num_rows($update);
 <input type="hidden" name="MM_insert" value="form1" />
 <input type="hidden" name="MM_update" value="form1" />
 </form>
-
+</div>
 </body>
 </html>
 <?php

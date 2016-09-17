@@ -1,4 +1,5 @@
 ﻿<?xml version="1.0" encoding="utf-8" ?>
 <info>
 	<infoitem key="UD_bill_set" value="name:houseID;datatype:int,name:ownerID;datatype:string,name:ownership;datatype:string,name:ID;datatype:int,name:houseID;datatype:int,name:date;datatype:date,name:current_month_water;datatype:int,name:paid_water;datatype:int,name:price_water;datatype:int,name:current_month_elec;datatype:int,name:price_elec;datatype:int,name:paid_elec;datatype:int,name:price_property;datatype:int,name:paid_property;datatype:int" />
+	<infoitem key="UD_bill_record" value="name:houseID;datatype:int,name:ownerID;datatype:string,name:ownership;datatype:string,name:ID;datatype:int,name:houseID;datatype:int,name:date;datatype:date,name:current_month_water;datatype:int,name:paid_water;datatype:int,name:price_water;datatype:int,name:current_month_elec;datatype:int,name:price_elec;datatype:int,name:paid_elec;datatype:int,name:price_property;datatype:int,name:paid_property;datatype:int" />
 </info>
