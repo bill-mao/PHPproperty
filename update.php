@@ -51,7 +51,7 @@ if ((isset($_POST["MM_update"])) && ($_POST["MM_update"] == "form1")) {
   mysql_select_db($database_conn, $conn);
   $Result1 = mysql_query($updateSQL, $conn) or die(mysql_error());
 
-  $updateGoTo = "../web/main.php";
+  $updateGoTo = "main.php";
   if (isset($_SERVER['QUERY_STRING'])) {
     $updateGoTo .= (strpos($updateGoTo, '?')) ? "&" : "?";
     $updateGoTo .= $_SERVER['QUERY_STRING'];
@@ -78,7 +78,7 @@ $totalRows_update = mysql_num_rows($update);
 
 <body>
 <div style="background-image:url(Images/register.jpg)" align="center">
-<form name="form1" action="<?php echo $editFormAction; ?>" method="POST" id="form1" target="_self">
+<form name="form1" action="<?php echo $editFormAction; ?>" method="POST" id="form1" target="_blank">
 <table width="419" border="1" cellspacing="2" cellpadding="2" summary="摘要">
   <caption>
     您现在可以修改您的账号
@@ -139,7 +139,7 @@ $totalRows_update = mysql_num_rows($update);
   </tr>
   <tr>
     <th colspan="2" scope="row"><label for="修改ID">修改</label>
-      <input type="submit" name="修改ID" id="修改ID" value="提交" />      &nbsp;</th>
+      <input name="修改ID" type="submit" id="修改ID" style=" CURSOR: hand ; background:url('Images/dl.gif ') no-repeat;width:39 ;height:19 " value="      " > </input>      &nbsp;</th>
   </tr>
 </table>
 <input type="hidden" name="MM_insert" value="form1" />

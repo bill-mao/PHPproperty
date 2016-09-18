@@ -9,7 +9,9 @@ function changeSrcComplaint(){
 function changeSrcCL(){
 	document.getElementById('tab').src='complaintList.php';
 }
-
+function showHouse(){
+	document.getElementById('tab').src='userHouse.php';
+}
 
 //改变管理员的center 的src
 function showHouses()
@@ -17,8 +19,21 @@ function showHouses()
 	document.getElementById('tab').src='admin_houses.php';
 }
 
+function createbill()
+{
+	document.getElementById('tab').src='createbill.php';
+}
+function ownhouse()
+{
+	document.getElementById('tab').src='ownhouse.php';
+}
 
-
+function shownotcom(){
+	document.getElementById('tab').src='notcom.php';
+}
+function showsolvecomplaint(){
+	document.getElementById('tab').src='solvedcomplaint.php'
+}
 
 
 function switchSysBar(){ 

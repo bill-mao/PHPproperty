@@ -1,6 +1,4 @@
 <?php require_once('Connections/conn.php'); ?>
-<?php require_once('Connections/conn.php');if(!isset($_SESSION))
-	session_start(); ?>
 <?php
 if (!function_exists("GetSQLValueString")) {
 function GetSQLValueString($theValue, $theType, $theDefinedValue = "", $theNotDefinedValue = "") 
@@ -33,6 +31,8 @@ function GetSQLValueString($theValue, $theType, $theDefinedValue = "", $theNotDe
 }
 }
 
+$currentPage = $_SERVER["PHP_SELF"];
+
 $maxRows_Recordset1 = 10;
 $pageNum_Recordset1 = 0;
 if (isset($_GET['pageNum_Recordset1'])) {
@@ -40,12 +40,12 @@ if (isset($_GET['pageNum_Recordset1'])) {
 }
 $startRow_Recordset1 = $pageNum_Recordset1 * $maxRows_Recordset1;
 
-$session_Recordset1 = "-1";
+$colname_Recordset1 = "root";
 if (isset($_SESSION['MM_Username'])) {
-  $session_Recordset1 = $_SESSION['MM_Username'];
+  $colname_Recordset1 = $_SESSION['MM_Username'];
 }
 mysql_select_db($database_conn, $conn);
-$query_Recordset1 = sprintf("SELECT * FROM manage , house ,own, householder WHERE own.ownerID=householder.ID and manage.adminID=%s and manage.houseID=house.ID  and own.houseID=house.ID", GetSQLValueString($session_Recordset1, "text"));
+$query_Recordset1 = sprintf("select * from house  , manage  where manage.adminID= %s and manage.houseID = house.ID", GetSQLValueString($colname_Recordset1, "text"));
 $query_limit_Recordset1 = sprintf("%s LIMIT %d, %d", $query_Recordset1, $startRow_Recordset1, $maxRows_Recordset1);
 $Recordset1 = mysql_query($query_limit_Recordset1, $conn) or die(mysql_error());
 $row_Recordset1 = mysql_fetch_assoc($Recordset1);
@@ -57,13 +57,28 @@ if (isset($_GET['totalRows_Recordset1'])) {
   $totalRows_Recordset1 = mysql_num_rows($all_Recordset1);
 }
 $totalPages_Recordset1 = ceil($totalRows_Recordset1/$maxRows_Recordset1)-1;
+
+$queryString_Recordset1 = "";
+if (!empty($_SERVER['QUERY_STRING'])) {
+  $params = explode("&", $_SERVER['QUERY_STRING']);
+  $newParams = array();
+  foreach ($params as $param) {
+    if (stristr($param, "pageNum_Recordset1") == false && 
+        stristr($param, "totalRows_Recordset1") == false) {
+      array_push($newParams, $param);
+    }
+  }
+  if (count($newParams) != 0) {
+    $queryString_Recordset1 = "&" . htmlentities(implode("&", $newParams));
+  }
+}
+$queryString_Recordset1 = sprintf("&totalRows_Recordset1=%d%s", $totalRows_Recordset1, $queryString_Recordset1);
 ?>
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
-
 <html xmlns="http://www.w3.org/1999/xhtml">
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-<title>bill_check</title>
+<title>无标题文档</title>
 <style type="text/css">
 <!--
 body {
@@ -101,9 +116,6 @@ a:active {
 	text-decoration: none;
 }
 .STYLE7 {font-size: 12}
-body,td,th {
-	font-size: 9px;
-}
 
 -->
 </style>
@@ -159,14 +171,12 @@ for(i=0;i<cs.length;i++){
 </head>
 
 <body>
-
-
 <table width="100%" border="0" align="center" cellpadding="0" cellspacing="0">
   <tr>
     <td height="30"><table width="100%" border="0" cellspacing="0" cellpadding="0">
       <tr>
         <td width="15" height="30"><img src="images/tab_03.gif" width="15" height="30" /></td>
-        <td background="images/tab_05.gif"><img src="images/311.gif" width="16" height="16" /> <span class="STYLE4">房屋列表</span></td>
+        <td background="images/tab_05.gif"><img src="images/311.gif" width="16" height="16" /> <span class="STYLE4">账单列表</span></td>
         <td width="14"><img src="images/tab_07.gif" width="14" height="30" /></td>
       </tr>
     </table></td>
@@ -175,48 +185,43 @@ for(i=0;i<cs.length;i++){
   
   <tr>
     <td><table width="100%" border="0" cellspacing="0" cellpadding="0">
-      
-        <tr>
-          <td width="9" background="images/tab_12.gif">&nbsp;</td>
-          <td bgcolor="e5f1d6"><table width="99%" border="0" align="center" cellpadding="0" cellspacing="1" bgcolor="#CECECE" onmouseover="changeto()"  onmouseout="changeback()">
+      <tr>
+        <td width="9" background="images/tab_12.gif">&nbsp;</td>
+        <td bgcolor="e5f1d6"><table width="99%" border="0" align="center" cellpadding="0" cellspacing="1" bgcolor="#CECECE" onmouseover="changeto()"  onmouseout="changeback()">
+        
+        
+          <tr>
+            <td   height="26" background="images/tab_14.gif" class="STYLE1"><div align="center" class="STYLE2 STYLE1">选择</div></td>
+            <td   height="18" background="images/tab_14.gif" class="STYLE1"><div align="center" class="STYLE2 STYLE1">房屋编号</div></td>
+            <td   height="18" background="images/tab_14.gif" class="STYLE1"><div align="center" class="STYLE2 STYLE1">城市</div></td>
+            <td width="10%" height="18" background="images/tab_14.gif" class="STYLE1"><div align="center" class="STYLE2 STYLE1">小区</div></td>
+            <td   height="18" background="images/tab_14.gif" class="STYLE1"><div align="center" class="STYLE2 STYLE1">楼号</div></td>
+            <td   height="18" background="images/tab_14.gif" class="STYLE1"><div align="center" class="STYLE2">单元</div></td>
             
-            
-            <tr>
-              <td width="6%" height="26" background="images/tab_14.gif" class="STYLE1"><div align="center" class="STYLE2 STYLE1">选择</div></td>
-              <td  height="18" background="images/tab_14.gif" class="STYLE1"><div align="center" class="STYLE2 STYLE1">序号</div></td>
-              <td  height="18" background="images/tab_14.gif" class="STYLE1">城市</td>
-              <td  height="18" background="images/tab_14.gif" class="STYLE1"><div align="center" class="STYLE2 STYLE1">小区</div></td>
-              <td  height="18" background="images/tab_14.gif" class="STYLE1"><div align="center" class="STYLE2 STYLE1">楼号</div></td>
-              <td   height="18" background="images/tab_14.gif" class="STYLE1"><div align="center" class="STYLE2">单元</div></td>
-              <td  height="18" background="images/tab_14.gif" class="STYLE1"><div align="center" class="STYLE2">房间号</div></td>
-              <td height="18" background="images/tab_14.gif" class="STYLE1"><div align="center" class="STYLE2">用户ID</div></td>
-              <td height="18" background="images/tab_14.gif" class="STYLE1"><div align="center" class="STYLE2">用户名</div></td>
-              
-              </tr>
-            
-          <?php do { ?>  
+            <td   height="18" background="images/tab_14.gif" class="STYLE1"><div align="center" class="STYLE2">房屋号</div></td>
+            <td   height="18" background="images/tab_14.gif" class="STYLE1"><div align="center" class="STYLE2">添加账单</div></td>
+          </tr>
+          
+          
+          <?php do { ?>
             <tr>
               <td height="18" bgcolor="#FFFFFF"><div align="center" class="STYLE1">
                 <input name="checkbox" type="checkbox" class="STYLE2" value="checkbox" />
-                </div></td>
+              </div></td>
               <td height="18" bgcolor="#FFFFFF" class="STYLE2"><div align="center" class="STYLE2 STYLE1"><?php echo $row_Recordset1['ID']; ?></div></td>
-              <td height="18" bgcolor="#FFFFFF"><div align="center" class="STYLE2 STYLE1"><?php echo $row_Recordset1['city']; ?></div></td>
+              <td height="18" bgcolor="#FFFFFF"><?php echo $row_Recordset1['city']; ?></td>
               <td height="18" bgcolor="#FFFFFF"><?php echo $row_Recordset1['subdistrict']; ?></td>
               <td height="18" bgcolor="#FFFFFF"><div align="center" class="STYLE2 STYLE1"><?php echo $row_Recordset1['building']; ?></div></td>
-              <td height="18" bgcolor="#FFFFFF"><div align="center" ><a href="#"><?php echo $row_Recordset1['unit']; ?></a></div></td>
-              <td height="18" bgcolor="#FFFFFF"><div align="center"><span class="STYLE1"> [</span><?php echo $row_Recordset1['room']; ?><span class="STYLE1">]</span></div></td>
-              <td height="18" bgcolor="#FFFFFF"><div align="center"><span class="STYLE2"> </span><span class="STYLE1">[</span><?php echo $row_Recordset1['ownerID']; ?><span class="STYLE1">]</span></div></td>
-              <td height="18" bgcolor="#FFFFFF"><div align="center"><span class="STYLE2"> </span><span class="STYLE1">[</span><?php echo $row_Recordset1['name']; ?><span class="STYLE1">]</span></div></td>
-              </tr>
-            
-             <?php } while ($row_Recordset1 = mysql_fetch_assoc($Recordset1)); ?>
-            
-            
-            
-          </table></td>
-          <td width="9" background="images/tab_16.gif">&nbsp;</td>
-        </tr>
-       
+              <td height="18" bgcolor="#FFFFFF"><div align="center" ><?php echo $row_Recordset1['unit']; ?></div></td>
+              <td height="18" bgcolor="#FFFFFF"><div align="center"><img src="images/037.gif" width="9" height="9" /><span class="STYLE1"> [</span><?php echo $row_Recordset1['room']; ?><span class="STYLE1">]</span></div></td>
+              <td height="18" bgcolor="#FFFFFF"><div align="center"><span class="STYLE1">[</span><a href="editbill.php?houseID=<?php echo $row_Recordset1['ID']; ?>" title="editbill" target="_blank">确认</a><span class="STYLE1">]</span></div></td>
+            </tr>
+            <?php } while ($row_Recordset1 = mysql_fetch_assoc($Recordset1)); ?>
+          
+          
+        </table></td>
+        <td width="9" background="images/tab_16.gif">&nbsp;</td>
+      </tr>
     </table></td>
   </tr>
   
@@ -233,8 +238,8 @@ for(i=0;i<cs.length;i++){
               <table width="352" height="20" border="0" cellpadding="0" cellspacing="0">
                 <tr>
                   <td width="62" height="22" valign="middle"><div align="right"><img src="images/first.gif" width="46" height="20" /></div></td>
-                  <td width="50" height="22" valign="middle"><div align="right"><img src="images/back.gif" width="46" height="20" /></div></td>
-                  <td width="54" height="22" valign="middle"><div align="right"><img src="images/next.gif" width="46" height="20" /></div></td>
+                  <td width="50" height="22" valign="middle"><div align="right"><a href="<?php printf("%s?pageNum_Recordset1=%d%s", $currentPage, max(0, $pageNum_Recordset1 - 1), $queryString_Recordset1); ?>"><img src="images/back.gif" width="46" height="20" /></a></div></td>
+                  <td width="54" height="22" valign="middle"><div align="right"><a href="<?php printf("%s?pageNum_Recordset1=%d%s", $currentPage, min($totalPages_Recordset1, $pageNum_Recordset1 + 1), $queryString_Recordset1); ?>"><img src="images/next.gif" width="46" height="20" /></a></div></td>
                   <td width="49" height="22" valign="middle"><div align="right"><img src="images/last.gif" width="46" height="20" /></div></td>
                   <td width="59" height="22" valign="middle"><div align="right">转到第</div></td>
                   <td width="25" height="22" valign="middle"><span class="STYLE7">
@@ -254,8 +259,6 @@ for(i=0;i<cs.length;i++){
   
   
 </table>
-
-
 </body>
 </html>
 <?php

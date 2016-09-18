@@ -125,7 +125,7 @@ body {
                     <td height="22"><div align="center">
                         <input name="pwd" type="password" size="15" style="height:17px; border:solid 1px #bbbbbb">
                     </div></td>
-                    <td height="22"><div align="center"><input   name="summit" type="submit" style=" CURSOR: hand ; background:url('Images/dl.gif ') no-repeat;width:39 ;height:19 " value="    "  ></div></td>
+                    <td height="22"><div align="center"><input   name="summit" type="submit" style=" CURSOR:hand ; background:url('Images/dl.gif ') no-repeat;width:39 ;height:19 " value="    "  ></div></td>
                   </tr> 
               <tr style="position:absolute ; top:50% ; left:80%">
       <td><a href="register.php">注册新用户</a>&nbsp; <a href="lostPwd.php">找回密码</a></td>

@@ -128,7 +128,7 @@ body {
                                   <input name="pwd" type="password" size="15" style="height:17px; border:solid 1px #bbbbbb">
                                 </div></td>
                               <td height="22"><div align="center">
-                                  <input   name="summit" type="submit" style=" CURSOR: hand ; background:url('Images/dl.gif ') no-repeat;width:44 ;height:19 " value="    "  >
+                                  <input   name="summit" type="submit" style="cursor:pointer ; background:url('Images/dl.gif ') no-repeat;width:44 ;height:19 " value="      "  />
                                 </div></td>
                             </tr>
                             <tr style="position:absolute ; top:50% ; left:80%">

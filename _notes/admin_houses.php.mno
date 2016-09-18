@@ -1,4 +1,5 @@
 ﻿<?xml version="1.0" encoding="utf-8" ?>
 <info>
 	<infoitem key="UD_house" value="name:ID;datatype:int,name:city;datatype:string,name:subdistrict;datatype:string,name:building;datatype:string,name:unit;datatype:string,name:room;datatype:string,name:adminID;datatype:string,name:houseID;datatype:int" />
+	<infoitem key="UD_Recordset1" value="name:adminID;datatype:string,name:houseID;datatype:int,name:ID;datatype:int,name:city;datatype:string,name:subdistrict;datatype:string,name:building;datatype:string,name:unit;datatype:string,name:room;datatype:string,name:houseID;datatype:int,name:ownerID;datatype:string,name:ownership;datatype:string,name:ID;datatype:string,name:name;datatype:string,name:phone;datatype:string,name:pwd;datatype:string,name:sex;datatype:string,name:birth;datatype:date,name:question;datatype:string,name:answer;datatype:string,name:IDNum;datatype:string" />
 </info>

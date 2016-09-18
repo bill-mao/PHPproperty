@@ -37,6 +37,20 @@ function GetSQLValueString($theValue, $theType, $theDefinedValue = "", $theNotDe
 
 $currentPage = $_SERVER["PHP_SELF"];
 
+$editFormAction = $_SERVER['PHP_SELF'];
+if (isset($_SERVER['QUERY_STRING'])) {
+  $editFormAction .= "?" . htmlentities($_SERVER['QUERY_STRING']);
+}
+
+if ((isset($_POST["MM_update"])) && ($_POST["MM_update"] == "form1")) {
+  $updateSQL = sprintf("UPDATE complaint SET solve=%s WHERE ID=%s",
+                       GetSQLValueString($_POST['solve'], "int"),
+                       GetSQLValueString($_POST['ID'], "int"));
+
+  mysql_select_db($database_conn, $conn);
+  $Result1 = mysql_query($updateSQL, $conn) or die(mysql_error());
+}
+
 $maxRows_Recordset1 = 10;
 $pageNum_Recordset1 = 0;
 if (isset($_GET['pageNum_Recordset1'])) {
@@ -120,10 +134,12 @@ $queryString_Recordset1 = sprintf("&totalRows_Recordset1=%d%s", $totalRows_Recor
           
           
           
-          <?php do { ?>
+          <?php 
+		  $count=0;
+		  do { $count++; ?>
             <tr>
               <td height="18" bgcolor="#FFFFFF"><div align="center" class="STYLE1">
-                <input name="checkbox" type="checkbox" class="STYLE2" value="checkbox" />
+                <input id='comID<?php echo $count ;?>' name="checkbox" type="checkbox" class="STYLE2" value="<?php echo $row_Recordset1['ID']; ?>" />
               </div></td>
               <td height="18" bgcolor="#FFFFFF" class="STYLE2"><div align="center" class="STYLE2 STYLE1"><?php echo $row_Recordset1['ID']; ?></div></td>
               <td height="18" bgcolor="#FFFFFF"><div align="center" class="STYLE2 STYLE1"><?php echo $row_Recordset1['date']; ?></div></td>
@@ -131,7 +147,7 @@ $queryString_Recordset1 = sprintf("&totalRows_Recordset1=%d%s", $totalRows_Recor
               <td height="18" bgcolor="#FFFFFF"><div align="center" class="STYLE2 STYLE1"><?php echo $row_Recordset1['solve']; ?></div></td>
               <td height="18" bgcolor="#FFFFFF">&nbsp; </td>
               <td height="18" bgcolor="#FFFFFF"><div align="center"><img src="images/037.gif" width="9" height="9" /><span class="STYLE1"> [</span><a href="#">编辑</a><span class="STYLE1">]</span></div></td>
-              <td height="18" bgcolor="#FFFFFF"><div align="center"><span class="STYLE2"><img src="images/010.gif" width="9" height="9" /> </span><span class="STYLE1">[</span><a href="#">点此解决</a><span class="STYLE1">]</span></div></td>
+              <td height="18" bgcolor="#FFFFFF"><div onclick="update(<?php echo $count ;?>)" align="center"><span class="STYLE2"><img src="images/010.gif" width="9" height="9" /> </span><span class="STYLE1">[</span><a href="#">点此解决</a><span class="STYLE1">]</span></div></td>
             </tr>
             <?php } while ($row_Recordset1 = mysql_fetch_assoc($Recordset1)); ?>
         <tr><br /></tr> <tr><br /></tr> <tr><br /></tr> <tr><br /></tr>
@@ -174,6 +190,22 @@ $queryString_Recordset1 = sprintf("&totalRows_Recordset1=%d%s", $totalRows_Recor
     </table></td>
   </tr>
 </table>
+
+<form method="POST" action="<?php echo $editFormAction; ?>" name='form1' id='form1'>
+<input id='inputID' type='hidden' name='ID' value='' />
+<input type='hidden' name='solve' value='1' />
+<input type="hidden" name="MM_update" value="form1" />
+</form>
+
+<script type='text/javascript'>
+function update(i){
+var id = document.getElementById('comID'+i).value;
+alert ('您将确认解决complaint id ：'+id);
+document.getElementById('inputID').value=id;
+document.getElementById('form1').submit();	
+}
+
+</script>
 </body>
 </html>
 <?php

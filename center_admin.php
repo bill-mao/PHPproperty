@@ -50,22 +50,29 @@ document.all("frmTitle").style.display=""
     <td width="200" id=frmTitle noWrap name="fmTitle" align="center" valign="top"><div height="100%" width="180" class="box">
         <h2>折叠菜单</h2>
         <ul class="menu">
-          <li class="level1" onClick="showHouses()"><a href="#none">房屋管理</a></li>
+          <li class="level1"><a href="#none">房屋管理</a>
+          <ul class="level2">
+              <li  onClick="showHouses()" ><a href="#none">查看房屋</a></li>
+         
+            </ul>
+          </li>
           <li class="level1"> <a href="#none">用户管理</a>
             <ul class="level2">
-              <li><a href=""></a></li>
+              <li onClick='ownhouse()'><a href="#none">关联用户房屋</a></li>
+              <li><a href="#none">查看用户</a></li>
          
             </ul>
           </li>
           <li class="level1"> <a href="#none">费用使用情况</a>
             <ul class="level2">
-              <li onClick="changeSrcBill()" ><a href="#none">综合费用情况</a></li>
+              <li onClick="createbill()" ><a href="#none">输入房屋水电费</a></li>
+              <li  ><a href="#none">缴费</a></li>
             </ul>
           </li>
           <li class="level1"> <a href="#none" >物业问题反映</a>
             <ul class="level2">
-              <li onClick="changeSrcComplaint()"><a  href="#none">其他问题</a></li>
-               <li onClick="changeSrcCL()"><a  href="#none">历史投诉列表</a></li>
+              <li onClick="showsolvecomplaint()"><a  href="#none">已解决投诉问题</a></li>
+               <li onClick="shownotcom()"><a  href="#none">未解决投诉列表</a></li>
              
             </ul>
           </li>
@@ -74,7 +81,7 @@ document.all("frmTitle").style.display=""
         </ul>
       </div></td>
     <td width="8" valign="middle" background="images/main_12.gif" onclick=switchSysBar()><span class="navPoint"><img src="images/main_18.gif" name="img1" width=8 height=52 id=img1></span></td>
-    <td align="center" valign="top"><iframe name="I2" id="tab" height="100%" width="100%" border="0" frameborder="0" src="tab.htm"> 浏览器不支持嵌入式框架，或被配置为不显示嵌入式框架。</iframe></td>
+    <td align="center" valign="top"><iframe name="I2" id="tab" height="100%" width="100%" border="0" frameborder="0" src=""> 浏览器不支持嵌入式框架，或被配置为不显示嵌入式框架。</iframe></td>
     <td width="4" align="center" valign="top" background="images/main_20.gif">　</td>
   </tr>
 </table>

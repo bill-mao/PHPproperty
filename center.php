@@ -53,7 +53,7 @@ document.all("frmTitle").style.display=""
           <li class="level1"><a href="#none">管理首页</a></li>
           <li class="level1"> <a href="#none">用户管理</a>
             <ul class="level2">
-              <li><a href="userHouse.php?ID=<?php echo $_SESSION['MM_Username']; ?>">房屋列表</a></li>
+              <li onClick="showHouse()"><a href="#none">房屋列表</a></li>
               <li><a href="update.php?ID=<?php echo $_SESSION['MM_Username'] ?>">个人信息修改</a></li>
               <li><a href="update.php?ID=<?php echo $_SESSION['MM_Username'] ?>">密码修改</a></li>
             </ul>
@@ -65,7 +65,7 @@ document.all("frmTitle").style.display=""
           </li>
           <li class="level1"> <a href="#none" >物业问题反映</a>
             <ul class="level2">
-              <li onClick="changeSrcComplaint()"><a  href="#none">其他问题</a></li>
+              <li onClick="changeSrcComplaint()"><a  href="#none">反映问题</a></li>
                <li onClick="changeSrcCL()"><a  href="#none">历史投诉列表</a></li>
              
             </ul>
@@ -75,7 +75,7 @@ document.all("frmTitle").style.display=""
         </ul>
       </div></td>
     <td width="8" valign="middle" background="images/main_12.gif" onclick=switchSysBar()><span class="navPoint"><img src="images/main_18.gif" name="img1" width=8 height=52 id=img1></span></td>
-    <td align="center" valign="top"><iframe name="I2" id="tab" height="100%" width="100%" border="0" frameborder="0" src="tab.htm"> 浏览器不支持嵌入式框架，或被配置为不显示嵌入式框架。</iframe></td>
+    <td align="center" valign="top"><iframe name="I2" id="tab" height="100%" width="100%" border="0" frameborder="0" src=""> 浏览器不支持嵌入式框架，或被配置为不显示嵌入式框架。</iframe></td>
     <td width="4" align="center" valign="top" background="images/main_20.gif">　</td>
   </tr>
 </table>
