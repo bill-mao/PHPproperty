@@ -12,6 +12,9 @@ function changeSrcCL(){
 function showHouse(){
 	document.getElementById('tab').src='userHouse.php';
 }
+function indexBill(){
+	document.getElementById('tab').src='indexBill.php';
+}
 
 //改变管理员的center 的src
 function showHouses()
@@ -34,6 +37,12 @@ function shownotcom(){
 function showsolvecomplaint(){
 	document.getElementById('tab').src='solvedcomplaint.php'
 }
+function addHouse(){
+	document.getElementById('tab').src='addHouse.php'
+}
+
+
+
 
 
 function switchSysBar(){ 

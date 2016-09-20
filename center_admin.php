@@ -49,23 +49,34 @@ document.all("frmTitle").style.display=""
   <tr>
     <td width="200" id=frmTitle noWrap name="fmTitle" align="center" valign="top"><div height="100%" width="180" class="box">
         <h2>折叠菜单</h2>
+        
         <ul class="menu">
+        <li class="level1"> <a href="#none">管理员管理</a>
+            <ul class="level2">
+            <!--管理员只有高级别的管理员才能够添加，不能够自己注册-->
+              <li onClick=''><a href="#none">增加管理员</a></li>
+              <li><a href="#none">查看修改删除管理员</a></li>
+         	
+            </ul>
+          </li>
+        
           <li class="level1"><a href="#none">房屋管理</a>
           <ul class="level2">
-              <li  onClick="showHouses()" ><a href="#none">查看房屋</a></li>
-         
+              <li  onClick="showHouses()" ><a href="#none">查看&删除&修改房屋信息</a></li>
+         		<li  onClick="addHouse()" ><a href="#none">添加房屋</a></li>
+                
             </ul>
           </li>
           <li class="level1"> <a href="#none">用户管理</a>
             <ul class="level2">
               <li onClick='ownhouse()'><a href="#none">关联用户房屋</a></li>
-              <li><a href="#none">查看用户</a></li>
-         
+              <li><a href="#none">查看删除用户</a></li>
+         	<li><a href="#none"></a></li>
             </ul>
           </li>
           <li class="level1"> <a href="#none">费用使用情况</a>
             <ul class="level2">
-              <li onClick="createbill()" ><a href="#none">输入房屋水电费</a></li>
+              <li onClick="createbill()" ><a href="#none">输入/修改房屋水电费</a></li>
               <li  ><a href="#none">缴费</a></li>
             </ul>
           </li>

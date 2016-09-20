@@ -61,6 +61,8 @@ document.all("frmTitle").style.display=""
           <li class="level1"> <a href="#none">费用使用情况</a>
             <ul class="level2">
               <li onClick="changeSrcBill()" ><a href="#none">综合费用情况</a></li>
+               <li onClick="indexBill()" ><a href="#none">费用日期查询</a></li>
+               <li onClick="" ><a href="#none">费用统计</a></li>
             </ul>
           </li>
           <li class="level1"> <a href="#none" >物业问题反映</a>

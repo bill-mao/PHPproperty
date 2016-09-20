@@ -4,7 +4,7 @@
 
 </head>
 
-
+<?php require_once('check_login.php') ?>
 <frameset rows="63,*,23" frameborder="no" border="0" framespacing="0">
 
  <frame src="top.php" name="topFrame" scrolling="No" noresize="noresize" id="topFrame" /> 

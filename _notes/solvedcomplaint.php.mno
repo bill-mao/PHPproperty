@@ -1,4 +1,4 @@
 ﻿<?xml version="1.0" encoding="utf-8" ?>
 <info>
-	<infoitem key="UD_Recordset1" value="name:userID;datatype:string,name:content;datatype:blob,name:date;datatype:date" />
+	<infoitem key="UD_Recordset1" value="name:ID;datatype:int,name:userID;datatype:string,name:content;datatype:blob,name:date;datatype:date" />
 </info>

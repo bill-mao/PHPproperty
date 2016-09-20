@@ -2,6 +2,7 @@
 <?php
 if(!isset($_SESSION))
 	session_start();
+	
 if (!function_exists("GetSQLValueString")) {
 function GetSQLValueString($theValue, $theType, $theDefinedValue = "", $theNotDefinedValue = "") 
 {
@@ -33,40 +34,18 @@ function GetSQLValueString($theValue, $theType, $theDefinedValue = "", $theNotDe
 }
 }
 
+
+
 $session_Recordset1 = "-1";
-if (isset($_SESSION['Username'])) {
-  $session_Recordset1 = $_SESSION['Username'];
+if (isset($_SESSION['MM_Username'])) {
+  $session_Recordset1 = $_SESSION['MM_Username'];
 }
 mysql_select_db($database_conn, $conn);
-$query_Recordset1 = sprintf("select complaint.userID ,complaint.content ,complaint.date from manage ,own ,bring, complaint where manage.adminID=%s and manage.houseID=own.houseID and own.ownerID= bring.user_ID and bring.complaint_ID= complaint.ID", GetSQLValueString($session_Recordset1, "text"));
+$query_Recordset1 = sprintf("SELECT distinct complaint.ID ,complaint.userID , complaint.content ,complaint.date  FROM manage ,own ,bring, complaint WHERE manage.adminID=%s and manage.houseID=own.houseID and own.ownerID= bring.user_ID and bring.complaint_ID= complaint.ID", GetSQLValueString($session_Recordset1, "text"));
 $Recordset1 = mysql_query($query_Recordset1, $conn) or die(mysql_error());
 $row_Recordset1 = mysql_fetch_assoc($Recordset1);
-$maxRows_Recordset1 = 10;
-$pageNum_Recordset1 = 0;
-if (isset($_GET['pageNum_Recordset1'])) {
-  $pageNum_Recordset1 = $_GET['pageNum_Recordset1'];
-}
-$startRow_Recordset1 = $pageNum_Recordset1 * $maxRows_Recordset1;
+$totalRows_Recordset1 = mysql_num_rows($Recordset1);$session_Recordset1 = "-1";
 
-$totalRows_Recordset1 = "root";
-if (isset($_SESSION['Username'])) {
-  $totalRows_Recordset1 = $_SESSION['Username'];
-}
-
-
-mysql_select_db($database_conn, $conn);
-$query_Recordset1 = sprintf("SELECT complaint.userID ,complaint.content ,complaint.date FROM manage ,own ,bring, complaint WHERE manage.adminID=%s and manage.houseID=own.houseID and own.ownerID= bring.user_ID and bring.complaint_ID= complaint.ID", GetSQLValueString($session_Recordset1, "text"));
-$Recordset1 = mysql_query($query_Recordset1, $conn) or die(mysql_error());
-$row_Recordset1 = mysql_fetch_assoc($Recordset1);
-$totalRows_Recordset1 = mysql_num_rows($Recordset1);$session_Recordset1 = "root";
-if (isset($_SESSION['Username'])) {
-  $session_Recordset1 = $_SESSION['Username'];
-}
-mysql_select_db($database_conn, $conn);
-$query_Recordset1 = sprintf("SELECT complaint.userID ,complaint.content ,complaint.date FROM manage ,own ,bring, complaint WHERE manage.adminID=%s and manage.houseID=own.houseID and own.ownerID= bring.user_ID and bring.complaint_ID= complaint.ID", GetSQLValueString($session_Recordset1, "text"));
-$Recordset1 = mysql_query($query_Recordset1, $conn) or die(mysql_error());
-$row_Recordset1 = mysql_fetch_assoc($Recordset1);
-$totalRows_Recordset1 = mysql_num_rows($Recordset1);
 ?>
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml">
@@ -94,7 +73,7 @@ $totalRows_Recordset1 = mysql_num_rows($Recordset1);
       </table></td>
   </tr>
   <tr>
-    <td><table draggable="true" width="100%" border="0" cellspacing="0" cellpadding="0">
+    <td><table width="100%" border="0" cellspacing="0" cellpadding="0">
         <tr valign="top">
           <td width="6%" height="26" background="images/tab_14.gif" class="STYLE1"><div align="center" class="STYLE2 STYLE1">选择</div></td>
           <td width="8%" height="18" background="images/tab_14.gif" class="STYLE1">用户名</td>

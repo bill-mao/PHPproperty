@@ -44,12 +44,16 @@ if (isset($_GET['pageNum_bill_record'])) {
 }
 $startRow_bill_record = $pageNum_bill_record * $maxRows_bill_record;
 
-$totalRows_bill_record = "-1";
+$totalRows_bill_record = "bill";
 if (isset($_SESSION['MM_Username'])) {
   $totalRows_bill_record = $_SESSION['MM_Username'];
 }
+$day_bill_record = "2013-09-16";
+if (isset($_GET['day'])) {
+  $day_bill_record = $_GET['day'];
+}
 mysql_select_db($database_conn, $conn);
-$query_bill_record = sprintf("SELECT * FROM own ,bill WHERE own.ownerID= %s and bill.houseID=own.houseID ", GetSQLValueString($totalRows_bill_record, "text"));
+$query_bill_record = sprintf("SELECT * FROM own ,bill WHERE own.ownerID= %s and bill.houseID=own.houseID  and bill.date=%s", GetSQLValueString($totalRows_bill_record, "text"),GetSQLValueString($day_bill_record, "date"));
 $query_limit_bill_record = sprintf("%s LIMIT %d, %d", $query_bill_record, $startRow_bill_record, $maxRows_bill_record);
 $bill_record = mysql_query($query_limit_bill_record, $conn) or die(mysql_error());
 $row_bill_record = mysql_fetch_assoc($bill_record);
@@ -221,7 +225,7 @@ for(i=0;i<cs.length;i++){
           
           <?php 
 		  $water=$elec=0;
-		 while ($row_bill_record = mysql_fetch_assoc($bill_record)) {
+		do{
 			 $waterFee=($row_bill_record['current_month_water']-$water)*$row_bill_record['price_water'];
 			 $elecFee=($row_bill_record['current_month_elec']-$elec)*$row_bill_record['price_water'];
 			  ?>
@@ -241,9 +245,9 @@ for(i=0;i<cs.length;i++){
               <td height="18" bgcolor="#FFFFFF"><div align="center"><img src="images/037.gif" width="9" height="9" /><span class="STYLE1"> [</span><a href="#">交费</a><span class="STYLE1">]</span></div></td>
               <td height="18" bgcolor="#FFFFFF"><div align="center"><span class="STYLE2"><img src="images/010.gif" width="9" height="9" /> </span><span class="STYLE1">[</span><a href="#">删除</a><span class="STYLE1">]</span></div></td>
             </tr>
-            <?php $water=$row_bill_record['current_month_water'];
-					$elec=$row_bill_record['current_month_elec'];
-					}	?>
+            <?php  $water=$row_bill_record['current_month_water'];
+					$elec=$row_bill_record['current_month_elec'];}
+			 while ($row_bill_record = mysql_fetch_assoc($bill_record)	);	?>
           
           
           <tr>
@@ -274,34 +278,17 @@ for(i=0;i<cs.length;i++){
                   <td width="50" height="22" valign="middle"><div align="right"><a href="<?php printf("%s?pageNum_bill_record=%d%s", $currentPage, max(0, $pageNum_bill_record - 1), $queryString_bill_record); ?>"><img src="images/back.gif" width="46" height="20" /></a></div></td>
                   <td width="54" height="22" valign="middle"><div align="right"><a href="<?php printf("%s?pageNum_bill_record=%d%s", $currentPage, min($totalPages_bill_record, $pageNum_bill_record + 1), $queryString_bill_record); ?>"  ><img src="images/next.gif" width="46" height="20" /></a></div></td>
                   <td width="49" height="22" valign="middle"><div align="right"><a href="<?php printf("%s?pageNum_bill_record=%d%s", $currentPage, $totalPages_bill_record, $queryString_bill_record); ?>"><img src="images/last.gif" width="46" height="20" /></a></div></td>
-                  <td width="59" height="22" valign="middle"><div align="right">转到第</div></td>
+                  <td width="59" height="22" valign="middle"><div align="right">转到</div></td>
                  <!--input 利用js获取值 herf 跳转-->
-                 
+                 <form name="dayform" action="indexBill.php" method="get">
                   <td width="25" height="22" valign="middle"><span class="STYLE7">
-                    <input id='page' name="textfield" type="text" class="STYLE1" style="height:10px; width:25px;" size="5" />
+                    <input id='page' name="day" type="text" class="STYLE1" style="height:10px; width:25px;" size="5" />
+                   
                   </span></td>
-                  <td width="23" height="22" valign="middle">页</td>
-                  <td onclick="jumpPage()" width="30" height="22" valign="middle"><a id = 'jump' href=''><img src="images/g_page.gif" width="14" height="14" /></a></td>
+                  <td width="23" height="22" valign="middle">日期</td>
+                  <td width="30" height="22" valign="middle"><a><input name="day" type="submit" /></a></td> </form>
                   
-                  <script type="text/javascript" >
-				  document.write("js 的write");
-					 
-				  function jumpPage(){
-					  var page=document.getElementById('page').value;
-					  page = parseInt(page);
-					  
-					  if( typeof page != 'number')
-					  	alert('请输入数字');
-					  else if( <?php echo $totalPages_bill_record ?>< page || page < 1)
-					  	alert('您输入的数字已经越界');
-					  else{	
-					  	  alert('您将要跳转到第'+page+'页');					
-						  var s='<?php printf("%s?pageNum_bill_record=", $currentPage) ?>'+page;
-						  s+='<?php echo $queryString_bill_record; ?>';
-						  document.getElementById('jump').href=s;
-						  }
-					  }
-				  </script>
+                 
                   
                 </tr>
               </table>

@@ -33,6 +33,8 @@ function GetSQLValueString($theValue, $theType, $theDefinedValue = "", $theNotDe
 }
 }
 
+$currentPage = $_SERVER["PHP_SELF"];
+
 $maxRows_Recordset1 = 10;
 $pageNum_Recordset1 = 0;
 if (isset($_GET['pageNum_Recordset1'])) {
@@ -45,7 +47,7 @@ if (isset($_SESSION['MM_Username'])) {
   $session_Recordset1 = $_SESSION['MM_Username'];
 }
 mysql_select_db($database_conn, $conn);
-$query_Recordset1 = sprintf("SELECT * FROM manage , house ,own, householder WHERE own.ownerID=householder.ID and manage.adminID=%s and manage.houseID=house.ID  and own.houseID=house.ID", GetSQLValueString($session_Recordset1, "text"));
+$query_Recordset1 = sprintf("SELECT * FROM house left join own on house.id = own.houseID LEFT JOIN householder on own.ownerID=householder.ID ,manage WHERE manage.adminID=%s and manage.houseID=house.Id", GetSQLValueString($session_Recordset1, "text"));
 $query_limit_Recordset1 = sprintf("%s LIMIT %d, %d", $query_Recordset1, $startRow_Recordset1, $maxRows_Recordset1);
 $Recordset1 = mysql_query($query_limit_Recordset1, $conn) or die(mysql_error());
 $row_Recordset1 = mysql_fetch_assoc($Recordset1);
@@ -57,6 +59,22 @@ if (isset($_GET['totalRows_Recordset1'])) {
   $totalRows_Recordset1 = mysql_num_rows($all_Recordset1);
 }
 $totalPages_Recordset1 = ceil($totalRows_Recordset1/$maxRows_Recordset1)-1;
+
+$queryString_Recordset1 = "";
+if (!empty($_SERVER['QUERY_STRING'])) {
+  $params = explode("&", $_SERVER['QUERY_STRING']);
+  $newParams = array();
+  foreach ($params as $param) {
+    if (stristr($param, "pageNum_Recordset1") == false && 
+        stristr($param, "totalRows_Recordset1") == false) {
+      array_push($newParams, $param);
+    }
+  }
+  if (count($newParams) != 0) {
+    $queryString_Recordset1 = "&" . htmlentities(implode("&", $newParams));
+  }
+}
+$queryString_Recordset1 = sprintf("&totalRows_Recordset1=%d%s", $totalRows_Recordset1, $queryString_Recordset1);
 ?>
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 
@@ -191,7 +209,8 @@ for(i=0;i<cs.length;i++){
               <td  height="18" background="images/tab_14.gif" class="STYLE1"><div align="center" class="STYLE2">房间号</div></td>
               <td height="18" background="images/tab_14.gif" class="STYLE1"><div align="center" class="STYLE2">用户ID</div></td>
               <td height="18" background="images/tab_14.gif" class="STYLE1"><div align="center" class="STYLE2">用户名</div></td>
-              
+              <td width="7%" height="18" background="images/tab_14.gif" class="STYLE1"><div align="center" class="STYLE2">修改</div></td>
+            <td width="7%" height="18" background="images/tab_14.gif" class="STYLE1"><div align="center" class="STYLE2">删除</div></td>
               </tr>
             
           <?php do { ?>  
@@ -207,6 +226,9 @@ for(i=0;i<cs.length;i++){
               <td height="18" bgcolor="#FFFFFF"><div align="center"><span class="STYLE1"> [</span><?php echo $row_Recordset1['room']; ?><span class="STYLE1">]</span></div></td>
               <td height="18" bgcolor="#FFFFFF"><div align="center"><span class="STYLE2"> </span><span class="STYLE1">[</span><?php echo $row_Recordset1['ownerID']; ?><span class="STYLE1">]</span></div></td>
               <td height="18" bgcolor="#FFFFFF"><div align="center"><span class="STYLE2"> </span><span class="STYLE1">[</span><?php echo $row_Recordset1['name']; ?><span class="STYLE1">]</span></div></td>
+              <td height="18" bgcolor="#FFFFFF"><div align="center"><img src="images/037.gif" width="9" height="9" /><span class="STYLE1"> [</span><a href="#">修改</a><span class="STYLE1">]</span></div></td>
+              <td height="18" bgcolor="#FFFFFF"><div align="center"><span class="STYLE2"><img src="images/010.gif" width="9" height="9" /> </span><span class="STYLE1">[</span><a href="#">删除</a><span class="STYLE1">]</span></div></td>
+              
               </tr>
             
              <?php } while ($row_Recordset1 = mysql_fetch_assoc($Recordset1)); ?>
@@ -233,9 +255,9 @@ for(i=0;i<cs.length;i++){
               <table width="352" height="20" border="0" cellpadding="0" cellspacing="0">
                 <tr>
                   <td width="62" height="22" valign="middle"><div align="right"><img src="images/first.gif" width="46" height="20" /></div></td>
-                  <td width="50" height="22" valign="middle"><div align="right"><img src="images/back.gif" width="46" height="20" /></div></td>
-                  <td width="54" height="22" valign="middle"><div align="right"><img src="images/next.gif" width="46" height="20" /></div></td>
-                  <td width="49" height="22" valign="middle"><div align="right"><img src="images/last.gif" width="46" height="20" /></div></td>
+                  <td width="50" height="22" valign="middle"><div align="right"><a href="<?php printf("%s?pageNum_Recordset1=%d%s", $currentPage, min($totalPages_Recordset1, $pageNum_Recordset1 + 1), $queryString_Recordset1); ?>"><img src="images/back.gif" width="46" height="20" /></a></div></td>
+                  <td width="54" height="22" valign="middle"><div align="right"><a href="<?php printf("%s?pageNum_Recordset1=%d%s", $currentPage, min($totalPages_Recordset1, $pageNum_Recordset1 + 1), $queryString_Recordset1); ?>"><img src="images/next.gif" width="46" height="20" /></a></div></td>
+                  <td width="49" height="22" valign="middle"><div align="right"><a href="<?php printf("%s?pageNum_Recordset1=%d%s", $currentPage, $totalPages_Recordset1, $queryString_Recordset1); ?>"><img src="images/last.gif" width="46" height="20" /></a></div></td>
                   <td width="59" height="22" valign="middle"><div align="right">转到第</div></td>
                   <td width="25" height="22" valign="middle"><span class="STYLE7">
                     <input name="textfield" type="text" class="STYLE1" style="height:10px; width:25px;" size="5" />
